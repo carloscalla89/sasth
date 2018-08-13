@@ -19,13 +19,19 @@ import { HomeComponent } from './home/home.component';
 import { OfertasComponent } from './ofertas/ofertas.component';
 import { FooterComponent } from './footer/footer.component';
 
+import { LoginComponent } from './login';
+
+import { Auth } from './auth/auth';
+import { AlertService, AuthenticationService, UserService } from './services';
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
     OfertasComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,10 @@ import { FooterComponent } from './footer/footer.component';
     MatListModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [        Auth,
+    AlertService,
+    AuthenticationService,
+    UserService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
