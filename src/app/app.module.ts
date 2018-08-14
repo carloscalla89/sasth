@@ -19,10 +19,15 @@ import { HomeComponent } from './home/home.component';
 import { OfertasComponent } from './ofertas/ofertas.component';
 import { FooterComponent } from './footer/footer.component';
 
-import { LoginComponent } from './login';
+import { LoginComponent } from './login/login.component';
 
+import { ReactiveFormsModule }    from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { Auth } from './auth/auth';
 import { AlertService, AuthenticationService, UserService } from './services';
+import { Login2Component } from './login2/login2.component';
+import { fakeBackendProvider } from './_helpers';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,8 @@ import { AlertService, AuthenticationService, UserService } from './services';
     HomeComponent,
     OfertasComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    Login2Component
   ],
   imports: [
     BrowserModule,
@@ -40,12 +46,19 @@ import { AlertService, AuthenticationService, UserService } from './services';
     MatToolbarModule,
     FlexLayoutModule,
     MatListModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [        Auth,
+  providers: [        
+    Auth,
     AlertService,
     AuthenticationService,
-    UserService,],
+    UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

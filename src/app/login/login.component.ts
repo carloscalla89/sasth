@@ -5,7 +5,10 @@ import { first } from 'rxjs/operators';
 
 import { AlertService, AuthenticationService } from '../services';
 
-@Component({templateUrl: 'login.component.html'})
+@Component({
+    selector: 'app-login',
+    templateUrl: './login.component.html'
+    })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loading = false;
@@ -26,7 +29,7 @@ export class LoginComponent implements OnInit {
         });
 
         // reset login status
-        this.authenticationService.logout();
+        //this.authenticationService.logout();
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
